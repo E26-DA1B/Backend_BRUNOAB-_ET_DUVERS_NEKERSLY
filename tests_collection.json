@@ -1,0 +1,60 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "Mini-Moodle API Tests",
+  "dateExported": "2026-07-16T12:00:00.000Z",
+  "version": "1.1",
+  "folders": [],
+  "requests": [
+    {
+      "name": "01. Auth - Inscription Nouvel Étudiant",
+      "url": "http://localhost:3000/api/auth/register",
+      "method": "POST",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"name\": \"Sophie Tremblay\",\n  \"email\": \"sophie.student@cegep.ca\",\n  \"password\": \"Securise123!\",\n  \"role\": \"ETUDIANT\"\n}"
+      }
+    },
+    {
+      "name": "02. Auth - Connexion Formateur de Test",
+      "url": "http://localhost:3000/api/auth/login",
+      "method": "POST",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"formateur@cegep.ca\",\n  \"password\": \"Securise123!\"\n}"
+      }
+    },
+    {
+      "name": "03. Sécurité - Tenter de créer un cours sans être connecté (Devrait faire un 401)",
+      "url": "http://localhost:3000/api/courses",
+      "method": "POST",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"title\": \"Cours Fantôme\",\n  \"description\": \"Test intrusion\",\n  \"level\": \"DEBUTANT\"\n}"
+      }
+    },
+    {
+      "name": "04. CRUD - Créer un cours légitime (🔒 Formateur connecté)",
+      "url": "http://localhost:3000/api/courses",
+      "method": "POST",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer <COLLER_LE_TOKEN_DU_FORMATEUR_ICI>" }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"title\": \"Architecture Moderne REST\",\n  \"description\": \"Approfondir Express 5 et Prisma v6.\",\n  \"level\": \"INTERMEDIAIRE\"\n}"
+      }
+    },
+    {
+      "name": "05. Axios - Générer automatiquement un quiz mondial",
+      "url": "http://localhost:3000/api/lessons/<COLLER_ID_D_UNE_LECON_ICI>/quiz",
+      "method": "POST",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer <COLLER_LE_TOKEN_DU_FORMATEUR_ICI>" }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"title\": \"Quiz Éducation Rapide\"\n}"
+      }
+    }
+  ]
+}
