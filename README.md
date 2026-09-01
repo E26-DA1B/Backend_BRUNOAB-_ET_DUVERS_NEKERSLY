@@ -1,81 +1,250 @@
-# Participant 1: Abé Tchombé Bruno Dimitri
-# Participant 2: Duvers, Nekersly
+# 🎓 Mini-Moodle — Laboratoire 2
 
-# 🎓 Mini-Moodle — Backend d'API REST
+Projet réalisé dans le cadre du cours **Service Web 420-941-MA — Groupe 25604**.
 
-Projet académique consistant à concevoir et réaliser le backend d'une plateforme d'apprentissage en ligne sécurisée. L'application gère les utilisateurs (Étudiants, Formateurs, Administrateurs), les cours, les leçons ordonnées, les inscriptions et la génération automatique de quiz éducatifs via une API publique externe.
+## 👥 Participants
 
-## 🛠️ Pile Technologique (Tech Stack)
+- Abé Tchombé Bruno Dimitri
+- Duvers, Nerkesly
 
-* **Environnement de développement** : Node.js (v24+)
-* **Framework Web** : Express (v5.0)
-* **Base de données Serverless** : Neon PostgreSQL
-* **ORM** : Prisma (v6.19)
-* **Sécurité & Chiffrement** : JSON Web Tokens (JWT) & Bcryptjs
-* **Client HTTP** : Axios (Intégration d'API externe)
+## 📖 Description
 
----
+Mini-Moodle est une plateforme d’apprentissage en ligne composée :
 
-## 🚀 Installation et Lancement local
+- d’une API REST développée avec Node.js et Express;
+- d’une base de données PostgreSQL hébergée sur Neon;
+- d’un frontend React permettant d’utiliser les principales fonctionnalités de l’API.
 
-Suivez ces étapes pour démarrer le projet sur votre machine :
+L’application gère les utilisateurs, l’authentification JWT, les rôles, les cours, les leçons, les inscriptions, la progression et les quiz.
 
-### 1. Cloner le projet et installer les dépendances
+## 🛠️ Technologies utilisées
+
+### Backend
+
+- Node.js
+- Express
+- PostgreSQL avec Neon
+- Prisma ORM
+- JSON Web Tokens
+- Bcryptjs
+- Axios
+- CORS
+- Nodemon
+
+### Frontend
+
+- React
+- Vite
+- Axios
+- Context API
+- CSS responsive
+
+## 📁 Structure du projet
+
+```text
+.
+├── frontend/                 # Application React
+│   ├── src/
+│   │   ├── components/
+│   │   ├── context/
+│   │   └── services/
+│   └── package.json
+├── prisma/
+│   ├── migrations/
+│   ├── schema.prisma
+│   └── seed.js
+├── src/
+│   ├── config/
+│   ├── middlewares/
+│   ├── routers/
+│   ├── services/
+│   └── app.js
+├── tests_collection.json
+└── package.json
+```
+
+## 🚀 Installation
+
+### 1. Cloner le dépôt
+
 ```bash
-git clone <URL_DE_VOTRE_DEPOT_GITHUB>
-cd mini-moodle-backend
+git clone https://github.com/E26-DA1B/Backend_BRUNOAB-_ET_DUVERS_NEKERSLY.git
+cd Backend_BRUNOAB-_ET_DUVERS_NEKERSLY
+```
+
+### 2. Installer les dépendances du backend
+
+```bash
 npm install
 ```
 
-### 2. Configuration des variables d'environnement (`.env`)
-Créez un fichier nommé `.env` à la racine du projet (ce fichier est ignoré par Git pour des raisons de sécurité). Ajoutez-y les variables suivantes configurées avec vos accès :
+### 3. Configurer les variables d’environnement
+
+Créez un fichier `.env` à la racine du projet :
 
 ```env
 PORT=3000
-DATABASE_URL="postgresql://neondb_owner:VOTRE_MOT_DE_PASSE@ep-raspy-sunset-atumuihy.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require"
-JWT_SECRET="CLE_SECRETE_CEGEP_2026_SUPER_ROBUSTE"
+DATABASE_URL="VOTRE_ADRESSE_POSTGRESQL_NEON"
+JWT_SECRET="VOTRE_CLE_SECRETE"
 ```
 
-### 3. Synchronisation et Initialisation de la Base de Données
-Générez le client Prisma, poussez la structure des tables sur Neon, puis exécutez le script de peuplement (seed) pour injecter les comptes et cours de démonstration :
+Le fichier `.env` est ignoré par Git et ne doit jamais être publié.
+
+### 4. Préparer Prisma
+
+Pour appliquer les migrations et générer le client Prisma :
+
 ```bash
+npx prisma migrate deploy
 npx prisma generate
-npx prisma db push
+```
+
+Pour ajouter les données de démonstration :
+
+```bash
 npx prisma db seed
 ```
 
-### 4. Démarrage du serveur de développement
-Lancez l'application avec rechargement automatique (Nodemon) :
+### 5. Démarrer le backend
+
 ```bash
 npm run dev
 ```
-Le terminal affichera : `🚀 Le serveur "mini-Moodle" écoute activement sur le port 3000`.
 
----
+Le backend sera accessible à l’adresse :
 
-## 🗺️ Cartographie des Points d'Accès (Endpoints API)
+```text
+http://localhost:3000
+```
 
-### 🔐 Authentification & Sécurité (`/api/auth`)
-* `POST /register`: Inscription d'un utilisateur (Rôles: `ETUDIANT`, `FORMATEUR`). Mots de passe chiffrés par Bcrypt.
-* `POST /login`: Authentification de l'utilisateur et génération du jeton JWT.
+### 6. Installer et démarrer le frontend
 
-### 📚 Gestion des Cours (`/api/courses`)
-* `GET /`: Liste publique de tous les cours disponibles (Accès libre).
-* `GET /:id/lessons` : Récupère les leçons d'un cours spécifique, **triées impérativement dans l'ordre pédagogique** (`orderBy: { order: 'asc' }`).
-* `POST /`: Création d'un cours (🔒 Réservé au rôle `FORMATEUR` via middleware JWT - Renvoie une erreur `403` si un étudiant tente l'action).
-* `PUT /:id`: Modification d'un cours (🔒 Réservé au rôle `FORMATEUR`).
-* `DELETE /:id`: Suppression d'un cours (🔒 Réservé au rôle `FORMATEUR`).
+Ouvrez un deuxième terminal :
 
-### 🌐 Génération de Quiz & Axios (`/api`)
-* `POST /lessons/:lessonId/quiz`: (🔒 Réservé au rôle `FORMATEUR`). Interroge en temps réel l'API mondiale **Open Trivia Database** via **Axios** pour récupérer 5 questions éducatives aléatoires et générer instantanément un quiz complet lié à la leçon en base de données.
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-### 🎓 Inscriptions et Progression (`/api/enrollments`)
-* `POST /subscribe`: Permet à un utilisateur connecté de s'inscrire à un cours (🔒 Réservé au rôle `ETUDIANT`). La contrainte d'unicité empêche les doublons d'inscription.
-* `PATCH /:id/progress`: Permet de mettre à jour le score total, le statut de complétion (`ACTIF`, `COMPLETE`) et le pourcentage de progression d'un étudiant.
+Le frontend sera accessible à l’adresse :
 
----
+```text
+http://localhost:5173
+```
 
-## 🧪 Validation & Tests
+## ✨ Fonctionnalités
 
-Une collection complète de requêtes prête à l'emploi est disponible à la racine du projet sous le fichier `tests_collection.json`. 
-Vous pouvez l'importer directement dans **Thunder Client** (VS Code) ou **Postman** pour exécuter les scénarios de test d'authentification, de gestion CRUD, de blocage de sécurité (401/403) et d'intégration de la banque de questions externe.
+### Authentification
+
+- Création d’un compte étudiant ou formateur;
+- connexion avec adresse courriel et mot de passe;
+- chiffrement des mots de passe avec Bcryptjs;
+- génération et conservation d’un jeton JWT;
+- déconnexion;
+- protection des actions selon le rôle.
+
+### Cours
+
+- affichage public des cours;
+- recherche par titre;
+- filtrage par niveau;
+- pagination;
+- affichage du formateur et du nombre de leçons;
+- création d’un cours par un formateur;
+- modification et suppression sécurisées;
+- mise à jour automatique du catalogue après une création ou une suppression.
+
+### Inscriptions et progression
+
+- inscription d’un étudiant à un cours;
+- prévention des inscriptions en double;
+- mise à jour du score;
+- mise à jour du pourcentage de progression;
+- gestion des statuts `ACTIF`, `COMPLETE` et `ABANDONNE`.
+
+### Quiz
+
+- génération de quiz à partir de l’API publique Open Trivia Database;
+- appels externes réalisés avec Axios;
+- association des questions à une leçon.
+
+### Sécurité
+
+- réponses `401` lorsqu’un jeton est absent ou invalide;
+- réponses `403` lorsqu’un rôle n’est pas autorisé;
+- vérification de l’identité du formateur avant la modification ou la suppression de ses cours;
+- variables sensibles conservées dans `.env`.
+
+## 🗺️ Principaux endpoints
+
+### Authentification — `/api/auth`
+
+| Méthode | Route       | Description                     |
+| ------- | ----------- | ------------------------------- |
+| POST    | `/register` | Créer un compte                 |
+| POST    | `/login`    | Se connecter et recevoir un JWT |
+
+### Cours — `/api/courses`
+
+| Méthode | Route          | Description                                   |
+| ------- | -------------- | --------------------------------------------- |
+| GET     | `/`            | Afficher les cours avec filtres et pagination |
+| GET     | `/:id/lessons` | Afficher les leçons d’un cours dans l’ordre   |
+| POST    | `/`            | Créer un cours comme formateur                |
+| PUT     | `/:id`         | Modifier un cours autorisé                    |
+| DELETE  | `/:id`         | Supprimer un cours autorisé                   |
+
+Exemple de recherche paginée :
+
+```text
+GET /api/courses?page=1&limit=10&search=react&level=DEBUTANT
+```
+
+### Inscriptions — `/api/enrollments`
+
+| Méthode | Route           | Description                     |
+| ------- | --------------- | ------------------------------- |
+| POST    | `/subscribe`    | Inscrire un étudiant à un cours |
+| PATCH   | `/:id/progress` | Mettre à jour sa progression    |
+
+### Quiz — `/api`
+
+| Méthode | Route                     | Description                    |
+| ------- | ------------------------- | ------------------------------ |
+| POST    | `/lessons/:lessonId/quiz` | Générer un quiz pour une leçon |
+
+### Utilisateurs — `/api/users`
+
+Les routes de gestion des utilisateurs sont protégées et réservées aux administrateurs.
+
+## 🧪 Tests et validation
+
+Une collection de requêtes est disponible dans :
+
+```text
+tests_collection.json
+```
+
+Elle peut être importée dans Thunder Client ou Postman afin de tester :
+
+- l’inscription et la connexion;
+- les jetons JWT;
+- les rôles;
+- les réponses `401` et `403`;
+- les opérations CRUD;
+- les filtres et la pagination;
+- les inscriptions et la progression;
+- la génération de quiz.
+
+Le frontend a également été vérifié avec :
+
+```bash
+cd frontend
+npm run lint
+npm run build
+```
+
+## 🔗 Dépôt GitHub
+
+[Backend_BRUNOAB-\_ET_DUVERS_NEKERSLY](https://github.com/E26-DA1B/Backend_BRUNOAB-_ET_DUVERS_NEKERSLY)
