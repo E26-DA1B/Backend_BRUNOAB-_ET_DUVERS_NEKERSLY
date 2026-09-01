@@ -1,30 +1,94 @@
 import axios from 'axios';
 
+const decodeHtml = (text) => {
+  return text
+    .replaceAll('&quot;', '"')
+    .replaceAll('&#039;', "'")
+    .replaceAll('&amp;', '&')
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>');
+};
+
 export const fetchQuizQuestions = async () => {
   try {
-    // Tentative d'appel sur l'API externe avec un timeout de 3 secondes
-    const response = await axios.get('https://opentdb.com', { timeout: 3000 });
-    
-    if (response.data && response.data.response_code === 0) {
-      return response.data.results.map((q) => ({
-        text: q.question,
-        correctAnswer: q.correct_answer,
-      }));
+    const response = await axios.get(
+      'https://opentdb.com/api.php',
+      {
+        params: {
+          amount: 5,
+          type: 'multiple'
+        },
+        timeout: 10000
+      }
+    );
+
+    if (
+      response.data.response_code !== 0 ||
+      !Array.isArray(response.data.results)
+    ) {
+      throw new Error(
+        "L'API Open Trivia n'a retourné aucune question."
+      );
     }
-    
-    // Si le site répond mais avec un code d'erreur (Rate Limit), on déclenche le plan de secours
-    throw new Error('API saturée');
-    
+
+    return response.data.results.map((question) => ({
+      text: decodeHtml(question.question),
+      correctAnswer: decodeHtml(question.correct_answer),
+      incorrectAnswers: question.incorrect_answers.map(
+        decodeHtml
+      )
+    }));
   } catch (error) {
-    console.log('⚠️ Banque mondiale indisponible ou saturée. Activation des questions de secours pédagogiques...');
-    
-    // Banque de questions de secours locale pour garantir la réussite du projet
+    console.error(
+      'Open Trivia indisponible. Utilisation des questions de secours.'
+    );
+
     return [
-      { text: "Que signifie REST dans le contexte des API ?", correctAnswer: "Representational State Transfer" },
-      { text: "Quel code de statut HTTP correspond à une ressource créée avec succès ?", correctAnswer: "201 Created" },
-      { text: "Quel outil utilise-t-on pour hacher les mots de passe de manière sécurisée ?", correctAnswer: "Bcrypt" },
-      { text: "À quoi sert un jeton JWT ?", correctAnswer: "À authentifier et transmettre des informations de session de manière sécurisée" },
-      { text: "Quel composant d'Express sert à intercepter une requête avant qu'elle n'atteigne le contrôleur ?", correctAnswer: "Un middleware" }
+      {
+        text: 'Que signifie REST dans le contexte des API?',
+        correctAnswer: 'Representational State Transfer',
+        incorrectAnswers: [
+          'Remote Execution Service Tool',
+          'Rapid Express Server Technology',
+          'Relational Endpoint Storage Type'
+        ]
+      },
+      {
+        text: 'Quel code HTTP représente une création réussie?',
+        correctAnswer: '201 Created',
+        incorrectAnswers: [
+          '200 Deleted',
+          '401 Created',
+          '500 Success'
+        ]
+      },
+      {
+        text: 'Quel outil sert à hacher les mots de passe?',
+        correctAnswer: 'Bcrypt',
+        incorrectAnswers: [
+          'Axios',
+          'Prisma',
+          'Express'
+        ]
+      },
+      {
+        text: 'À quoi sert un jeton JWT?',
+        correctAnswer: 'À authentifier un utilisateur',
+        incorrectAnswers: [
+          'À créer une base de données',
+          'À styliser une page',
+          'À installer les dépendances'
+        ]
+      },
+      {
+        text: 'Quel composant intercepte une requête Express?',
+        correctAnswer: 'Un middleware',
+        incorrectAnswers: [
+          'Un composant React',
+          'Une migration',
+          'Une feuille CSS'
+        ]
+      }
     ];
   }
 };

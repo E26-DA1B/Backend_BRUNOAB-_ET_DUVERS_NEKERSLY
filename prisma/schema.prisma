@@ -82,10 +82,11 @@ model Quiz {
 }
 
 model Question {
-  id            String @id @default(uuid())
-  externalId    String
-  text          String
-  correctAnswer String
-  quizId        String
-  quiz          Quiz   @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  id               String   @id @default(uuid())
+  externalId       String
+  text             String
+  correctAnswer    String
+  incorrectAnswers String[] @default([])
+  quizId           String
+  quiz             Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
 }
