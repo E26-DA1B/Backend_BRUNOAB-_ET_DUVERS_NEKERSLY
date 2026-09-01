@@ -1,0 +1,307 @@
+#root {
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  background: #f5f7fb;
+  color: #172033;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.25rem 7%;
+  color: white;
+  background: #172554;
+}
+
+.site-header h1,
+.hero h2,
+.section-heading h2,
+.auth-form h2,
+.course-form h2 {
+  margin: 0;
+}
+
+.eyebrow {
+  margin: 0 0 0.4rem;
+  color: #2563eb;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+}
+
+.site-header .eyebrow {
+  color: #bfdbfe;
+}
+
+.user-area {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-area div {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-area span {
+  color: #bfdbfe;
+  font-size: 0.8rem;
+}
+
+main {
+  width: min(1120px, 90%);
+  margin: auto;
+}
+
+.hero {
+  margin: 2rem 0;
+  padding: 3rem;
+  color: white;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #172554, #2563eb);
+  box-shadow: 0 18px 45px rgb(30 64 175 / 20%);
+}
+
+.hero .eyebrow {
+  color: #bfdbfe;
+}
+
+.hero h2 {
+  max-width: 700px;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+}
+
+.hero p:last-child {
+  max-width: 650px;
+  color: #dbeafe;
+  font-size: 1.05rem;
+}
+
+.auth-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.auth-form,
+.course-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1.5rem;
+  border: 1px solid #dbe3f0;
+  border-radius: 18px;
+  background: white;
+  box-shadow: 0 8px 25px rgb(15 23 42 / 7%);
+}
+
+.create-course-section {
+  margin-bottom: 2rem;
+}
+
+.course-form {
+  max-width: 650px;
+}
+
+label {
+  margin-top: 0.4rem;
+  font-weight: 700;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  color: #172033;
+  background: white;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #2563eb;
+  outline: 3px solid rgb(37 99 235 / 15%);
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  padding: 0.75rem 1rem;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  background: #2563eb;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.secondary-button {
+  border: 1px solid #93c5fd;
+  background: transparent;
+}
+
+.danger-button {
+  margin-top: auto;
+  background: #dc2626;
+}
+
+.danger-button:hover:not(:disabled) {
+  background: #b91c1c;
+}
+
+.connected-message,
+.status-message,
+.error-message,
+.success-message {
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+}
+
+.connected-message,
+.status-message {
+  color: #1e40af;
+  background: #dbeafe;
+}
+
+.error-message {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+.success-message {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.courses-section {
+  margin: 2rem 0 3rem;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.filters {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.3rem;
+  border: 1px solid #dbe3f0;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 6%);
+}
+
+.course-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+.course-card h3 {
+  margin-bottom: 0.4rem;
+}
+
+.teacher {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.level {
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  color: #1e40af;
+  background: #dbeafe;
+  font-weight: 800;
+}
+
+.level-intermediaire {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.level-avance {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+footer {
+  padding: 1.5rem;
+  color: #64748b;
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .site-header,
+  .section-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .auth-section,
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filters {
+    flex-direction: column;
+  }
+
+  .hero {
+    padding: 2rem 1.4rem;
+  }
+}
