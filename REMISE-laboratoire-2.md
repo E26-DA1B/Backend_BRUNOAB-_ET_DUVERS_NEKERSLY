@@ -2,8 +2,11 @@
 
 ## Équipe
 
-- **Abé Tchombé Bruno Dimitri** — Matricule : **2596005**
-- **Duvers, Nerkesly** — Matricule : **2495958**
+| Nom complet                | Matricule | (Optionnel) rôle |
+|----------------------------|-----------|------------------|
+| Bruno Dimitri Abé Tchombé  | 2596005   | Backend          |
+| Duvers, Nerkesly           | 2495958   | Frontend         |
+| Prénom Nom                 | 0000000   | Full-stack       |
 
 ## Sujet
 
@@ -17,46 +20,46 @@ https://github.com/E26-DA1B/Backend_BRUNOAB-_ET_DUVERS_NEKERSLY
 
 ### Backend
 
-- [x] CRUD complet sur l’entité principale Course
-- [x] Filtres et pagination avec la query string
-- [x] Prisma avec PostgreSQL sur Neon
-- [x] Énums et relations Prisma
-- [x] Migration Prisma committée
-- [x] Code organisé en routers
-- [x] Inscription et connexion avec JWT
-- [x] Routes protégées
-- [x] Gestion des rôles et des réponses 401/403
-- [x] Mots de passe chiffrés avec bcryptjs
-- [x] Intégration de l’API Open Trivia Database avec Axios
-- [x] CORS activé
-- [x] Secrets conservés dans le fichier `.env`
+- [✅] CRUD complet sur l’entité principale Course
+- [✅] Filtres et pagination avec la query string
+- [✅] Prisma avec PostgreSQL sur Neon
+- [✅] Énums et relations Prisma
+- [✅] Migration Prisma committée
+- [✅] Code organisé en routers
+- [✅] Inscription et connexion avec JWT
+- [✅] Routes protégées
+- [✅] Gestion des rôles et des réponses 401/403
+- [✅] Mots de passe chiffrés avec bcryptjs
+- [✅] Intégration de l’API Open Trivia Database avec Axios
+- [✅] CORS activé
+- [✅] Secrets conservés dans le fichier `.env`
 
 ### Frontend
 
-- [x] Application React créée avec Vite
-- [x] Instance Axios centralisée
-- [x] Affichage des cours avec `useEffect`
-- [x] Gestion des états de chargement, d’erreur et de succès
-- [x] Recherche, filtres et pagination
-- [x] Formulaire contrôlé pour créer un cours
-- [x] Composants React réutilisables
-- [x] Formulaire de connexion
-- [x] Formulaire d’inscription
-- [x] Token conservé dans `localStorage`
-- [x] Token envoyé dans le header `Authorization`
-- [x] Authentification globale avec `AuthContext`
-- [x] Déconnexion
-- [x] Action protégée visible selon le rôle connecté
-- [x] Interface avec style responsive
+- [✅] Application React créée avec Vite
+- [✅] Instance Axios centralisée
+- [✅] Affichage des cours avec `useEffect`
+- [✅] Gestion des états de chargement, d’erreur et de succès
+- [✅] Recherche, filtres et pagination
+- [✅] Formulaire contrôlé pour créer un cours
+- [✅] Composants React réutilisables
+- [✅] Formulaire de connexion
+- [✅] Formulaire d’inscription
+- [✅] Token conservé dans `localStorage`
+- [✅] Token envoyé dans le header `Authorization`
+- [✅] Authentification globale avec `AuthContext`
+- [✅] Déconnexion
+- [✅] Action protégée visible selon le rôle connecté
+- [✅] Interface avec style responsive
 
 ### Validation
 
-- [x] Affichage public des cours
-- [x] Connexion d’un formateur testée
-- [x] Création protégée d’un cours testée
-- [x] Mise à jour automatique du catalogue testée
-- [x] Suppression sécurisée d’un cours testée
-- [x] Build du frontend réussi
-- [x] ESLint exécuté sans erreur
-- [x] README complété
-- [x] Frontend et backend présents dans le même dépôt Git
+- [✅] Affichage public des cours
+- [✅] Connexion d’un formateur testée
+- [✅] Création protégée d’un cours testée
+- [✅] Mise à jour automatique du catalogue testée
+- [✅] Suppression sécurisée d’un cours testée
+- [✅] Build du frontend réussi
+- [✅] ESLint exécuté sans erreur
+- [✅] README complété
+- [✅] Frontend et backend présents dans le même dépôt Git
