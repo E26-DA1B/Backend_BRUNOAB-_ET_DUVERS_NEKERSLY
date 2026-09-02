@@ -79,3 +79,4 @@ Le terminal affichera : `🚀 Le serveur "mini-Moodle" écoute activement sur le
 
 Une collection complète de requêtes prête à l'emploi est disponible à la racine du projet sous le fichier `tests_collection.json`. 
 Vous pouvez l'importer directement dans **Thunder Client** (VS Code) ou **Postman** pour exécuter les scénarios de test d'authentification, de gestion CRUD, de blocage de sécurité (401/403) et d'intégration de la banque de questions externe.
+# Backend_BRUNOAB-_ET_DUVERS_NEKERSLY_mini-noodle
