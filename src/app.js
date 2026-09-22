@@ -12,9 +12,22 @@ import userRouter from './routers/userRouter.js';
 
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://vercel.app' // 👈 Remplacez par votre vraie URL frontend Vercel dès qu'elle est générée
+];
+
 app.use(
   cors({
-    origin: 'http://localhost:5173'
+    origin: function (origin, callback) {
+      // Permet les requêtes sans origine (comme Postman ou les requêtes internes de Vercel)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Bloqué par CORS (Origine non autorisée)'));
+      }
+    }
   })
 );
 
@@ -22,7 +35,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   res.status(200).json({
-    message: 'API Mini-Moodle fonctionnelle.'
+    message: 'API Mini-Moodle fonctionnelle sur Vercel.'
   });
 });
 
@@ -40,8 +53,12 @@ app.use((req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(
-    `🚀 Le serveur "mini-Moodle" écoute activement sur le port ${PORT}`
-  );
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(
+      `🚀 Le serveur "mini-Moodle" écoute activement sur le port ${PORT}`
+    );
+  });
+}
+
+export default app;
