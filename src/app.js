@@ -13,8 +13,8 @@ import userRouter from './routers/userRouter.js';
 const app = express();
 
 const allowedOrigins = [
-  'http://localhost:5173',
-  'https://vercel.app' // 👈 Remplacez par votre vraie URL frontend Vercel dès qu'elle est générée
+  'https://vercel.app'
+
 ];
 
 app.use(
